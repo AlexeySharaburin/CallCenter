@@ -2,7 +2,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class CallCenter {
 
-    public ConcurrentLinkedQueue queue = new ConcurrentLinkedQueue();
+    public ConcurrentLinkedQueue<String> queue = new ConcurrentLinkedQueue<>();
+    //
 
     int callMax = 5;
     int iterationsMax = 5;
@@ -31,7 +32,11 @@ public class CallCenter {
                 if (queue.isEmpty()) {
                     break;
                 } else {
-                    System.out.printf("!!!%s обработал %s\n", Thread.currentThread().getName(), queue.poll());
+                    if (queue.poll() != null) {
+                        System.out.printf("!!!%s обработал %s\n", Thread.currentThread().getName(), queue.poll());
+                    } else {
+                        break;
+                    }
                 }
             }
         } catch (
@@ -41,38 +46,3 @@ public class CallCenter {
     }
 
 }
-
-//    public void workProfy() {
-//        try {
-//            while (true) {
-//                Thread.sleep(3000);
-//                if (queue.isEmpty()) {
-//                    break;
-//                } else {
-//                    System.out.printf("%s обработал %s\n", Thread.currentThread().getName(), queue.poll());
-//                }
-//            }
-//        } catch (
-//                Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-
-
-//
-//public void workProfy() {
-//        try {
-//        while (true) {
-//        Thread.sleep(3000);
-//        System.out.printf("%s обработал %s\n", Thread.currentThread().getName(), queue.poll());
-//        if (queue.isEmpty()) {
-//        break;
-//        }
-//        }
-//        } catch (
-//        Exception e) {
-//        e.printStackTrace();
-//        }
-//        }
